@@ -1,0 +1,22 @@
+[Unit]
+Description=TRMNL framebuffer client (Waveshare ILI9486 on fb1)
+After=network-online.target local-fs.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Environment=TRMNL_BASE_URL=http://192.168.0.103:4567
+Environment=TRMNL_DEVICE_ID=E4:5F:01:24:D5:87
+Environment=TRMNL_API_KEY=pk92xYGUqjeKiPYdsul3zA
+Environment=TRMNL_FB=/dev/fb1
+Environment=TRMNL_FB_WIDTH=480
+Environment=TRMNL_FB_HEIGHT=320
+Environment=TRMNL_FB_STRIDE=960
+Environment=TRMNL_FB_BPP=16
+ExecStart=/usr/bin/python3 /opt/trmnl-client/trmnl_fb_client.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
